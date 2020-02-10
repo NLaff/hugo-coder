@@ -1,37 +1,54 @@
-<nav class="navigation">
-  <section class="container">
-    <a class="navigation-title" href="{{ .Site.BaseURL | relLangURL }}">
-      {{ .Site.Title }}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      1 Word Email
     </a>
-    {{ if or .Site.Menus.main .Site.IsMultiLingual }}
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      {{ with .Site.Menus.main}}
-        {{ range sort . }}
-          <li class="navigation-item">
-            <a class="navigation-link" href="{{ .URL | absLangURL }}">{{ .Name }}</a>
-          </li>
-        {{ end }}
-      {{ end }}
-      {{ if .Site.IsMultiLingual }}
-        {{ $node := . }}
-        {{ .Scratch.Set "separator" true }}
-        {{ range .Site.Home.AllTranslations }}
-          {{ if ne $.Site.Language .Language }}
-            {{ if $node.Scratch.Get "separator" }}
-              <li class="navigation-item menu-separator">
-                <span>|</span>
-              </li>
-              {{ $node.Scratch.Set "separator" false }}
-            {{ end }}
-            <li class="navigation-item">
-              <a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
-            </li>
-          {{ end }}
-        {{ end }}
-      {{ end }}
-    </ul>
-    {{ end }}
-  </section>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="/words">
+        Words
+      </a>
+      <a class="navbar-item" href="/about">
+        About
+      </a>
+    </div>
+  </div>
+ </div>      
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
