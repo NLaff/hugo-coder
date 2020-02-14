@@ -99,15 +99,19 @@
   {{ end }}
   <body class="{{ $csClass }}{{ if .Site.Params.rtl }} rtl{{ end }}">
     <main class="wrapper">
+        <section class="hero is primary is-fullheight">
+        <div class="hero-head">
+            
       {{ partial "header.html" . }}
-
+            </div>  
       <div class="content">
         {{ block "content" . }}{{ end }}
       </div>
 
       {{ partial "footer.html" . }}
     </main>
-
+          
+</section>
     {{ template "_internal/google_analytics.html" . }}
 
   </body>
